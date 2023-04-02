@@ -36,7 +36,14 @@ return require('packer').startup(function(use)
     {'hrsh7th/nvim-cmp'},     -- Required
     {'hrsh7th/cmp-nvim-lsp'}, -- Required
     {'L3MON4D3/LuaSnip'},     -- Required
-  }
+  },
+  use {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup()
+    end
+  },
+  use 'airblade/vim-gitgutter'
 }
 end)
 
