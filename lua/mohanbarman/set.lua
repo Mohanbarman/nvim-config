@@ -17,6 +17,7 @@ vim.opt.undofile = true
 
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
+vim.opt.ignorecase = true
 
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
@@ -24,5 +25,9 @@ vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "100"
+vim.opt.cursorline = true
 vim.g.netrw_banner = 0
+
+--vim.g.loaded_netrw = 1
+--vim.g.loaded_netrwPlugin = 1
 
