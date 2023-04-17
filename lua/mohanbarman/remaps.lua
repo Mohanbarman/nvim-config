@@ -15,4 +15,5 @@ vim.keymap.set("n", "tf", ":NvimTreeFindFile<CR>")
 vim.keymap.set("n", "tc", ":NvimTreeCollapse<CR>")
 
 vim.keymap.set("n", "<leader>F", ":Neoformat<CR>")
+vim.keymap.set("n", "gr", ":Telescope lsp_references<CR>")
 

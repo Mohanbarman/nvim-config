@@ -16,6 +16,7 @@ return require('packer').startup(function(use)
 
   use('navarasu/onedark.nvim')
   use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
+  use('nvim-treesitter/nvim-treesitter-context')
   use('ThePrimeagen/harpoon')
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
@@ -55,14 +56,6 @@ return require('packer').startup(function(use)
   use('MunifTanjim/prettier.nvim')
   use('sbdchd/neoformat')
   use({
-    'phaazon/hop.nvim',
-    branch = 'v2', -- optional but strongly recommended
-    config = function()
-      -- you can configure Hop the way you like here; see :h hop-config
-      require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
-    end
-  })
-  use({
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   })
@@ -75,4 +68,9 @@ return require('packer').startup(function(use)
   })
   use({ "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} })
   use("folke/neodev.nvim")
+  use("lukas-reineke/indent-blankline.nvim")
+  use {
+    "SmiteshP/nvim-navic",
+    requires = "neovim/nvim-lspconfig"
+  }
 end)
