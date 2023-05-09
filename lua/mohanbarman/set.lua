@@ -25,7 +25,7 @@ vim.opt.signcolumn = "yes"
 
 vim.opt.updatetime = 50
 
-vim.opt.colorcolumn = "100"
+--vim.opt.colorcolumn = "100"
 vim.opt.cursorline = true
 vim.g.netrw_banner = 0
 
@@ -33,6 +33,7 @@ vim.opt.showmode = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.showmode = false
+--vim.opt.mouse = ""
 
 --vim.g.loaded_netrw = 1
 --vim.g.loaded_netrwPlugin = 1
