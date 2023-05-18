@@ -79,6 +79,7 @@ lsp.on_attach(function(client, bufnr)
 	vim.keymap.set("n", "<leader>i", function()
 		vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
 	end, opts)
+  vim.keymap.set("n", "<leader>ge", ":Telescope diagnostics<CR>")
 end)
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {

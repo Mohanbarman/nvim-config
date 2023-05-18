@@ -96,4 +96,14 @@ return require("packer").startup(function(use)
 	})
 	use("David-Kunz/jester")
 	use({ "simrat39/rust-tools.nvim" }) -- Rust LSP
+	use({ "catppuccin/nvim", as = "catppuccin" })
+	use({ "nvim-tree/nvim-web-devicons" })
+	use({ "ellisonleao/gruvbox.nvim" })
+	use({
+		"folke/trouble.nvim",
+		requires = "nvim-tree/nvim-web-devicons",
+		config = function()
+			require("trouble").setup({})
+		end,
+	})
 end)
