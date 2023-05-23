@@ -16,7 +16,6 @@ return require("packer").startup(function(use)
 
 	use("navarasu/onedark.nvim")
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
-	use("nvim-treesitter/nvim-treesitter-context")
 	use("ThePrimeagen/harpoon")
 	use("mbbill/undotree")
 	use("tpope/vim-fugitive")
@@ -70,17 +69,13 @@ return require("packer").startup(function(use)
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
 	use("folke/neodev.nvim")
 	use("lukas-reineke/indent-blankline.nvim")
-	use({
-		"SmiteshP/nvim-navic",
-		requires = "neovim/nvim-lspconfig",
-	})
+	use("SmiteshP/nvim-navic")
 	use({
 		"ckipp01/stylua-nvim",
 		config = function()
 			require("stylua-nvim").setup({ config_file = "stylua.toml" })
 		end,
 	})
-	use("mhartington/formatter.nvim")
 	use({
 		"kylechui/nvim-surround",
 		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -106,4 +101,14 @@ return require("packer").startup(function(use)
 			require("trouble").setup({})
 		end,
 	})
+	use("EdenEast/nightfox.nvim")
+	use({
+		"akinsho/toggleterm.nvim",
+		tag = "*",
+		config = function()
+			require("toggleterm").setup()
+		end,
+	})
+	use("windwp/nvim-ts-autotag")
+	use({ "stevearc/dressing.nvim" })
 end)

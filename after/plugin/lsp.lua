@@ -1,10 +1,7 @@
 local lsp = require("lsp-zero")
 local navic = require("nvim-navic")
 
-lsp.preset({
-	name = "recommended",
-	float_border = "single",
-})
+lsp.preset({ name = "recommended" })
 
 lsp.ensure_installed({
 	"tsserver",
@@ -38,7 +35,6 @@ lsp.set_preferences({
 
 lsp.on_attach(function(client, bufnr)
 	lsp.default_keymaps({ buffer = bufnr })
-	navic.attach(client, bufnr)
 
 	local opts = { buffer = bufnr, remap = false }
 
@@ -64,13 +60,13 @@ lsp.on_attach(function(client, bufnr)
 	vim.keymap.set("n", "K", function()
 		vim.lsp.buf.hover()
 	end, opts)
-	vim.keymap.set("n", "[d", function()
+	vim.keymap.set("n", "]d", function()
 		vim.diagnostic.goto_next()
 	end, opts)
-	vim.keymap.set("n", "]d", function()
+	vim.keymap.set("n", "[d", function()
 		vim.diagnostic.goto_prev()
 	end, opts)
-	vim.keymap.set("n", "<leader>ca", function()
+	vim.keymap.set("n", "<leader>A", function()
 		vim.lsp.buf.code_action()
 	end, opts)
 	vim.keymap.set("n", "<leader>rn", function()
@@ -79,11 +75,11 @@ lsp.on_attach(function(client, bufnr)
 	vim.keymap.set("n", "<leader>i", function()
 		vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
 	end, opts)
-  vim.keymap.set("n", "<leader>ge", ":Telescope diagnostics<CR>")
+	vim.keymap.set("n", "<leader>ge", ":Telescope diagnostics<CR>")
 end)
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-	virtual_text = false,
+	virtual_text = true,
 })
 
 lsp.setup()

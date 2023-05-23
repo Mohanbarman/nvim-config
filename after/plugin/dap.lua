@@ -60,7 +60,7 @@ for _, language in ipairs({ "typescript", "javascript" }) do
 			request = "attach",
 			name = "Attach",
 			processId = function()
-				return require("dap.utils").pick_process({ filter = "npm" })
+				return require("dap.utils").pick_process()
 			end,
 			cwd = "${workspaceFolder}",
 			skipFiles = { "<node_internals>/**", "node_modules/**" },

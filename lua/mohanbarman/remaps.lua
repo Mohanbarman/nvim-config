@@ -7,12 +7,12 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("v", "<leader>y", '"+y')
-vim.keymap.set("n", "<leader>F", ":FormatWrite<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>F", ":Neoformat<CR>")
 vim.keymap.set("n", "<leader>dt", require("jester").debug)
 vim.keymap.set("n", "<leader>sv", ":vsplit<CR>") -- create vertical split
 vim.keymap.set("n", "<leader>sh", ":split<CR>") -- create horizontal split
 vim.keymap.set("n", "<leader>x", ":ToggleTerm<CR>")
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>w", ":w<CR>")
-vim.keymap.set("n", "<leader>lr", ":LspStop | LspStart<CR>")
+vim.keymap.set("n", "<leader>lr", ":LspRestart<CR>")
 
