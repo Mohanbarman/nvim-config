@@ -41,14 +41,14 @@ navic.setup({
 	click = tonumber,
 })
 
-vim.o.winbar = "%f"
+vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
 
-require("lualine").setup({
-	sections = {
-		lualine_c = {
-			"navic",
-			color_correction = nil,
-			navic_opts = nil,
-		},
-	},
-})
+-- require("lualine").setup({
+-- 	sections = {
+-- 		lualine_c = {
+-- 			"navic",
+-- 			color_correction = nil,
+-- 			navic_opts = nil,
+-- 		},
+-- 	},
+-- })

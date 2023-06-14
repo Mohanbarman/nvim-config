@@ -3,7 +3,7 @@ require("nvim-treesitter.configs").setup({
 	ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "typescript" },
 
 	-- Install parsers synchronously (only applied to `ensure_installed`)
-	sync_install = false,
+	sync_install = true,
 
 	-- Automatically install missing parsers when entering buffer
 	-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
@@ -13,7 +13,7 @@ require("nvim-treesitter.configs").setup({
 	},
 
 	highlight = {
-		enable = false,
-		additional_vim_regex_highlighting = false,
+		enable = true,
+		additional_vim_regex_highlighting = true,
 	},
 })
