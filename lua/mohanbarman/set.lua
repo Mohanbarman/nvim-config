@@ -28,6 +28,7 @@ vim.opt.updatetime = 50
 --vim.opt.colorcolumn = "100"
 vim.opt.cursorline = true
 vim.g.netrw_banner = 0
+vim.g.asyncrun_open = 8
 
 vim.opt.showmode = true
 vim.opt.splitbelow = true
