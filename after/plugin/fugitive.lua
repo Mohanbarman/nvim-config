@@ -1,5 +1,5 @@
 vim.keymap.set("n", "<leader>gs", ":vertical G<CR>")
-vim.keymap.set("n", "<leader>gb", ":Telescope git_branches<CR>")
+vim.keymap.set("n", "<leader>gb", ":G blame<CR>")
 vim.keymap.set("n", "<leader>gl", ":Telescope git_commits<CR>")
 vim.keymap.set("n", "<leader>gp", ":AsyncRun git push<CR>") -- git push
 vim.keymap.set("n", "<leader>gh", ":0GcLog!<CR>") -- open file history

@@ -5,4 +5,7 @@ vim.keymap.set("n", "<leader>ff", builtin.git_files, {})
 vim.keymap.set("n", "<leader>fa", builtin.find_files, {})
 vim.keymap.set("n", "<leader>fl", builtin.live_grep, {})
 vim.keymap.set("n", "<leader>fb", builtin.git_branches, {})
-telescope.setup({ defaults = { file_ignore_patterns = { "node_modules", "dist", "release", "assets" } } })
+telescope.setup({
+	defaults = { file_ignore_patterns = { "node_modules", "dist", "release", "assets" } },
+	pickers = { current_buffer_fuzzy_find = { sorting_strategy = "ascending" } },
+})
