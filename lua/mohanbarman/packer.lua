@@ -110,7 +110,15 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use("windwp/nvim-ts-autotag")
-	use({ "stevearc/dressing.nvim" })
+	use("stevearc/dressing.nvim")
 	use("shaunsingh/nord.nvim")
 	use("folke/tokyonight.nvim")
+	use("stevearc/oil.nvim")
+	use({
+		"akinsho/git-conflict.nvim",
+		tag = "*",
+		config = function()
+			require("git-conflict").setup()
+		end,
+	})
 end)

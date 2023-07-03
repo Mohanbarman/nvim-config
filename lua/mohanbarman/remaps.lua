@@ -12,7 +12,7 @@ vim.keymap.set("n", "<leader>dt", require("jester").debug)
 vim.keymap.set("n", "<leader>sv", ":vsplit<CR>") -- create vertical split
 vim.keymap.set("n", "<leader>sh", ":split<CR>") -- create horizontal split
 vim.keymap.set("n", "<leader>x", ":ToggleTerm<CR>")
-vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>e", ":Oil<CR>")
 vim.keymap.set("n", "<leader>w", ":w<CR>")
 vim.keymap.set("n", "<leader>W", ":wa<CR>")
 vim.keymap.set("n", "<leader>lr", ":LspRestart<CR>")
