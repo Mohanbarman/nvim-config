@@ -78,14 +78,14 @@ for _, language in ipairs({ "typescript", "javascript" }) do
 	}
 end
 
--- debug jest tests
-require("jester").setup({
-	dap = {
-		console = "externalTerminal",
-		type = "pwa-node",
-	},
-})
-
-vim.keymap.set("n", "<leader>dt", function()
-	require("jester").debug()
-end)
+-- -- debug jest tests
+-- require("jester").setup({
+-- 	dap = {
+-- 		console = "externalTerminal",
+-- 		type = "pwa-node",
+-- 	},
+-- })
+--
+-- vim.keymap.set("n", "<leader>dt", function()
+-- 	require("jester").debug()
+-- end)

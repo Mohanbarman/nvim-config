@@ -57,6 +57,8 @@ lsp.on_attach(function(client, bufnr)
 		vim.keymap.set("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
 	end
 
+	vim.keymap.set("n", "<leader>F", function()  require("conform").format({ bufnr = bufnr }) end)
+
 	vim.keymap.set("n", "K", function()
 		vim.lsp.buf.hover()
 	end, opts)

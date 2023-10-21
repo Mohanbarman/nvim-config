@@ -1,10 +1,14 @@
-vim.opt.list = true
--- vim.opt.listchars:append "space:⋅"
-
-require("indent_blankline").setup {
-    show_end_of_line = true,
-    space_char_blankline = " ",
-    show_current_context = false,
-    show_current_context_start = true,
+local highlight = {
+	"Whitespace",
 }
 
+require("ibl").setup({
+	indent = { highlight = highlight },
+	scope = {
+		enabled = false,
+	},
+	whitespace = {
+		remove_blankline_trail = true,
+		highlight = highlight,
+	},
+})

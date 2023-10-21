@@ -54,7 +54,6 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use("numToStr/Comment.nvim")
-	use("sbdchd/neoformat")
 	use({
 		"nvim-lualine/lualine.nvim",
 		requires = { "nvim-tree/nvim-web-devicons", opt = true },
@@ -68,7 +67,7 @@ return require("packer").startup(function(use)
 	})
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
 	use("folke/neodev.nvim")
-	use("lukas-reineke/indent-blankline.nvim")
+	use({ "lukas-reineke/indent-blankline.nvim" })
 	use("SmiteshP/nvim-navic")
 	use({
 		"ckipp01/stylua-nvim",
@@ -93,7 +92,6 @@ return require("packer").startup(function(use)
 	use({ "simrat39/rust-tools.nvim" }) -- Rust LSP
 	use({ "catppuccin/nvim", as = "catppuccin" })
 	use({ "nvim-tree/nvim-web-devicons" })
-	use({ "ellisonleao/gruvbox.nvim" })
 	use({
 		"folke/trouble.nvim",
 		requires = "nvim-tree/nvim-web-devicons",
@@ -101,7 +99,6 @@ return require("packer").startup(function(use)
 			require("trouble").setup({})
 		end,
 	})
-	use("EdenEast/nightfox.nvim")
 	use({
 		"akinsho/toggleterm.nvim",
 		tag = "*",
@@ -111,15 +108,14 @@ return require("packer").startup(function(use)
 	})
 	use("windwp/nvim-ts-autotag")
 	use("stevearc/dressing.nvim")
-	use("shaunsingh/nord.nvim")
 	use("folke/tokyonight.nvim")
 	use("stevearc/oil.nvim")
+	use("folke/twilight.nvim")
+	use("tpope/vim-dadbod")
 	use({
-		"akinsho/git-conflict.nvim",
-		tag = "*",
-		config = function()
-			require("git-conflict").setup({})
-		end,
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		after = "nvim-treesitter",
+		requires = "nvim-treesitter/nvim-treesitter",
 	})
-	use("skywind3000/asyncrun.vim")
+	use({ "stevearc/conform.nvim" })
 end)
