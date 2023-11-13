@@ -1,5 +1,5 @@
 require("mohanbarman.remaps")
-require("mohanbarman.packer")
+require("mohanbarman.lazy")
 require("mohanbarman.theme")
 require("mohanbarman.set")
 

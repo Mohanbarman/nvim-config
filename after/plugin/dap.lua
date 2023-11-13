@@ -40,10 +40,27 @@ end)
 vim.keymap.set("n", "<leader>ds", function()
 	widgets.centered_float(widgets.scopes)
 end)
+vim.keymap.set("n", "<leader>dus", function()
+	local sidebar = widgets.sidebar(widgets.scopes)
+	sidebar.open()
+end)
 
 require("dap-vscode-js").setup({
+	debugger_path = "/Users/mohan/.local/share/nvim/lazy/vscode-js-debug",
 	adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" }, -- which adapters to register in nvim-dap
 })
+
+require("dap-go").setup({
+	delve = {
+		path = "dlv",
+		initialize_timeout_sec = 20,
+		port = "${port}",
+		args = {},
+		build_flags = "",
+	},
+})
+
+dap.set_log_level("TRACE")
 
 for _, language in ipairs({ "typescript", "javascript" }) do
 	dap.configurations[language] = {
@@ -62,8 +79,9 @@ for _, language in ipairs({ "typescript", "javascript" }) do
 			processId = function()
 				return require("dap.utils").pick_process()
 			end,
+      -- port = 9229,
 			cwd = "${workspaceFolder}",
-			skipFiles = { "<node_internals>/**", "node_modules/**" },
+			-- skipFiles = { "<node_internals>/**", "node_modules/**" },
 		},
 		{
 			type = "pwa-node",
@@ -77,6 +95,7 @@ for _, language in ipairs({ "typescript", "javascript" }) do
 		},
 	}
 end
+
 
 -- -- debug jest tests
 -- require("jester").setup({

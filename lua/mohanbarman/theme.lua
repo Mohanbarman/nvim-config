@@ -4,13 +4,16 @@ require("catppuccin").setup({
         light = "latte",
         dark = "mocha",
     },
+    integrations = {
+        gitsigns = true,
+        nvimtree = true,
+        treesitter = true,
+        navic = true,
+        harpoon = true,
+        indent_blankline = true
+    }
 })
 
 -- setup must be called before loading
 vim.cmd.colorscheme "catppuccin"
-
--- -- Lua
--- require("onedark").setup({
--- 	style = "darker",
--- })
--- require("onedark").load()
+vim.cmd('hi normal guibg=NONE')
