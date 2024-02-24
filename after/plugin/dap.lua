@@ -1,5 +1,77 @@
 local dap = require("dap")
 local widgets = require("dap.ui.widgets")
+local rt = require("rust-tools")
+local mason_registery = require("mason-registry")
+local dapui = require('dapui')
+
+require("nvim-dap-projects").search_project_config()
+require("mason").setup()
+require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
+dapui.setup()
+
+local codelldb = mason_registery.get_package("codelldb")
+local extension_path = codelldb:get_install_path() .. "/extension/"
+local codelldb_path = extension_path .. "adapter/codelldb"
+local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+
+rt.setup({
+	dap = {
+		adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+	},
+})
+
+require("dap-vscode-js").setup({
+	debugger_path = "/Users/mohan/.local/share/nvim/lazy/vscode-js-debug",
+	adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" }, -- which adapters to register in nvim-dap
+})
+
+require("dap-go").setup({
+	delve = {
+		path = "dlv",
+		initialize_timeout_sec = 20,
+		port = "${port}",
+		args = {},
+		build_flags = "",
+	},
+})
+
+for _, language in ipairs({ "typescript", "javascript" }) do
+	dap.configurations[language] = {
+		{
+			type = "pwa-node",
+			request = "launch",
+			name = "Launch file",
+			program = "${file}",
+			cwd = "${workspaceFolder}",
+			skipFiles = { "<node_internals>/**", "node_modules/**" },
+		},
+		{
+			type = "pwa-node",
+			request = "attach",
+			name = "Attach",
+			-- processId = function()
+			-- 	return require("dap.utils").pick_process()
+			-- end,
+			port = "9229",
+			cwd = "${workspaceFolder}",
+			skipFiles = { "<node_internals>/**", "node_modules/**" },
+		},
+		{
+			type = "pwa-node",
+			request = "launch",
+			name = "Debug NestJS",
+			program = "${workspaceFolder}/node_modules/@nestjs/cli/bin/nest.js",
+			args = { "start", "--watch" },
+			cwd = "${workspaceFolder}",
+			skipFiles = { "<node_internals>/**", "node_modules/**" },
+			-- console = "integratedTerminal",
+		},
+	}
+end
+
+vim.keymap.set("n", "<leader>du", function() 
+  dapui.toggle()
+end)
 
 vim.keymap.set("n", "<leader>dc", function()
 	dap.continue()
@@ -40,71 +112,17 @@ end)
 vim.keymap.set("n", "<leader>ds", function()
 	widgets.centered_float(widgets.scopes)
 end)
-vim.keymap.set("n", "<leader>dus", function()
-	local sidebar = widgets.sidebar(widgets.scopes)
-	sidebar.open()
+vim.keymap.set("n", "]b", require("goto-breakpoints").next, {})
+vim.keymap.set("n", "[b", require("goto-breakpoints").prev, {})
+vim.keymap.set("n", "]B", require("goto-breakpoints").stopped, {})
+
+vim.keymap.set("n", "<leader>Dn", function()
+	dap.run({
+		type = "pwa-node",
+		request = "attach",
+		name = "Attach",
+		port = "9229",
+		cwd = "${workspaceFolder}",
+		skipFiles = { "<node_internals>/**", "node_modules/**" },
+	})
 end)
-
-require("dap-vscode-js").setup({
-	debugger_path = "/Users/mohan/.local/share/nvim/lazy/vscode-js-debug",
-	adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" }, -- which adapters to register in nvim-dap
-})
-
-require("dap-go").setup({
-	delve = {
-		path = "dlv",
-		initialize_timeout_sec = 20,
-		port = "${port}",
-		args = {},
-		build_flags = "",
-	},
-})
-
-dap.set_log_level("TRACE")
-
-for _, language in ipairs({ "typescript", "javascript" }) do
-	dap.configurations[language] = {
-		{
-			type = "pwa-node",
-			request = "launch",
-			name = "Launch file",
-			program = "${file}",
-			cwd = "${workspaceFolder}",
-			skipFiles = { "<node_internals>/**", "node_modules/**" },
-		},
-		{
-			type = "pwa-node",
-			request = "attach",
-			name = "Attach",
-			processId = function()
-				return require("dap.utils").pick_process()
-			end,
-      -- port = 9229,
-			cwd = "${workspaceFolder}",
-			-- skipFiles = { "<node_internals>/**", "node_modules/**" },
-		},
-		{
-			type = "pwa-node",
-			request = "launch",
-			name = "Debug NestJS",
-			program = "${workspaceFolder}/node_modules/@nestjs/cli/bin/nest.js",
-			args = { "start", "--watch" },
-			cwd = "${workspaceFolder}",
-			skipFiles = { "<node_internals>/**", "node_modules/**" },
-			console = "integratedTerminal",
-		},
-	}
-end
-
-
--- -- debug jest tests
--- require("jester").setup({
--- 	dap = {
--- 		console = "externalTerminal",
--- 		type = "pwa-node",
--- 	},
--- })
---
--- vim.keymap.set("n", "<leader>dt", function()
--- 	require("jester").debug()
--- end)

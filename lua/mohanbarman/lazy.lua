@@ -2,35 +2,31 @@ return require("lazy").setup({
 	-- Telescope fuzzy finder
 	{
 		"nvim-telescope/telescope.nvim",
-		version = "0.1.1",
 		dependencies = { { "nvim-lua/plenary.nvim" } },
 	},
 
 	{ "navarasu/onedark.nvim" },
-	{ "nvim-treesitter/nvim-treesitter" },
+	{
+		"nvim-treesitter/nvim-treesitter",
+		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
+	},
 	{ "ThePrimeagen/harpoon" },
 	{ "mbbill/undotree" },
 	{ "tpope/vim-fugitive" },
 	{
+		"williamboman/mason.nvim",
+		build = function()
+			pcall(vim.cmd, "MasonUpdate")
+		end,
+	},
+	{ "williamboman/mason-lspconfig.nvim" },
+	{ "neovim/nvim-lspconfig" },
+	{ "hrsh7th/nvim-cmp" },
+	{ "hrsh7th/cmp-nvim-lsp" },
+	{ "L3MON4D3/LuaSnip" },
+	{
 		"VonHeikemen/lsp-zero.nvim",
 		branch = "v2.x",
-		dependencies = {
-			-- LSP Support
-			{ "neovim/nvim-lspconfig" }, -- Required
-			{
-				-- Optional
-				"williamboman/mason.nvim",
-				build = function()
-					pcall(vim.cmd, "MasonUpdate")
-				end,
-			},
-			{ "williamboman/mason-lspconfig.nvim" }, -- Optional
-
-			-- Autocompletion
-			{ "hrsh7th/nvim-cmp" }, -- Required
-			{ "hrsh7th/cmp-nvim-lsp" }, -- Required
-			{ "L3MON4D3/LuaSnip" }, -- Required
-		},
 	},
 	{ "lewis6991/gitsigns.nvim" },
 	{ "windwp/nvim-autopairs" },
@@ -44,7 +40,7 @@ return require("lazy").setup({
 	{
 		"microsoft/vscode-js-debug",
 		lazy = true,
-		version = "v1.83.1",
+		version = "v1.80.0",
 		build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
 	},
 	{ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } },
@@ -74,13 +70,6 @@ return require("lazy").setup({
 			require("trouble").setup({})
 		end,
 	},
-	{
-		"akinsho/toggleterm.nvim",
-		version = "*",
-		config = function()
-			require("toggleterm").setup()
-		end,
-	},
 	{ "windwp/nvim-ts-autotag" },
 	{ "stevearc/dressing.nvim" },
 	{ "folke/tokyonight.nvim" },
@@ -89,4 +78,11 @@ return require("lazy").setup({
 	{ "tpope/vim-dadbod" },
 	{ "stevearc/conform.nvim" },
 	{ "leoluz/nvim-dap-go" },
+	{ "ofirgall/goto-breakpoints.nvim" },
+	{ "stevearc/aerial.nvim" },
+	-- { "arkav/lualine-lsp-progress" },
+	{ "ldelossa/nvim-dap-projects" },
+	{ "rmagatti/goto-preview" },
+  { "mfussenegger/nvim-dap-python" }
+	-- { name = "g-worktree", dir = "/Users/mohan/Dev/g-worktree.nvim" },
 })

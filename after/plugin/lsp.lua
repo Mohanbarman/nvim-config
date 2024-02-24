@@ -4,10 +4,7 @@ require("rust-tools").setup({})
 
 lsp.preset({ name = "recommended" })
 
-lsp.ensure_installed({
-	"tsserver",
-	"eslint",
-})
+lsp.ensure_installed({ "tsserver" })
 
 local cmp = require("cmp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -34,8 +31,30 @@ lsp.set_preferences({
 	},
 })
 
+lsp.use("lua_ls", {
+	settings = {
+		Lua = {
+			diagnostics = {
+				-- Get the language server to recognize the `vim` global
+				globals = { "vim" },
+			},
+		},
+	},
+})
+
+lsp.use("tsserver", {
+	settings = {
+		typescript = {
+			preferences = {
+				importModuleSpecifier = "relative",
+			},
+		},
+	},
+})
+
 lsp.on_attach(function(client, bufnr)
 	lsp.default_keymaps({ buffer = bufnr })
+	require("goto-preview").setup({})
 
 	local opts = { buffer = bufnr, remap = false }
 
@@ -57,6 +76,9 @@ lsp.on_attach(function(client, bufnr)
 		vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 		vim.keymap.set("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
 	end
+
+	vim.keymap.set("n", "gP", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { noremap = true })
+	vim.keymap.set("n", "gx", "<cmd>lua require('goto-preview').close_all_win()<CR>", { noremap = true })
 
 	vim.keymap.set("n", "<leader>F", function()
 		require("conform").format()
