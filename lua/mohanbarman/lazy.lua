@@ -43,7 +43,11 @@ return require("lazy").setup({
 		version = "v1.80.0",
 		build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
 	},
-	{ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } },
+	{
+		"rcarriga/nvim-dap-ui",
+		requires = { "mfussenegger/nvim-dap" },
+		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+	},
 	{ "folke/neodev.nvim" },
 	{ "lukas-reineke/indent-blankline.nvim" },
 	{ "SmiteshP/nvim-navic" },
@@ -83,6 +87,55 @@ return require("lazy").setup({
 	-- { "arkav/lualine-lsp-progress" },
 	{ "ldelossa/nvim-dap-projects" },
 	{ "rmagatti/goto-preview" },
-  { "mfussenegger/nvim-dap-python" }
+	{ "mfussenegger/nvim-dap-python" },
+	{
+		"kristijanhusak/vim-dadbod-ui",
+		dependencies = {
+			{ "tpope/vim-dadbod", lazy = true },
+			{ "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
+		},
+		cmd = {
+			"DBUI",
+			"DBUIToggle",
+			"DBUIAddConnection",
+			"DBUIFindBuffer",
+		},
+		init = function()
+			-- Your DBUI configuration
+			vim.g.db_ui_use_nerd_fonts = 1
+		end,
+	},
+	{ "xiyaowong/transparent.nvim" },
+	{
+		"folke/zen-mode.nvim",
+		opts = {
+			plugins = {
+				-- disable some global vim options (vim.o...)
+				-- comment the lines to not apply the options
+				options = {
+					enabled = true,
+					ruler = false, -- disables the ruler text in the cmd line area
+					showcmd = false, -- disables the command in the last line of the screen
+					-- you may turn on/off statusline in zen mode by setting 'laststatus'
+					-- statusline will be shown only if 'laststatus' == 3
+					laststatus = 0, -- turn off the statusline in zen mode
+				},
+				twilight = { enabled = false }, -- enable to start Twilight when zen mode opens
+				gitsigns = { enabled = false }, -- disables git signs
+			},
+		},
+	},
+  {
+    'mikesmithgh/kitty-scrollback.nvim',
+    enabled = true,
+    lazy = true,
+    cmd = { 'KittyScrollbackGenerateKittens', 'KittyScrollbackCheckHealth' },
+    event = { 'User KittyScrollbackLaunch' },
+    -- version = '*', -- latest stable version, may have breaking changes if major version changed
+    -- version = '^5.0.0', -- pin major version, include fixes and features that do not have breaking changes
+    config = function()
+      require('kitty-scrollback').setup()
+    end,
+  }
 	-- { name = "g-worktree", dir = "/Users/mohan/Dev/g-worktree.nvim" },
 })

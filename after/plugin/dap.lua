@@ -69,8 +69,8 @@ for _, language in ipairs({ "typescript", "javascript" }) do
 	}
 end
 
-vim.keymap.set("n", "<leader>du", function() 
-  dapui.toggle()
+vim.keymap.set("n", "<leader>du", function()
+	dapui.toggle()
 end)
 
 vim.keymap.set("n", "<leader>dc", function()
